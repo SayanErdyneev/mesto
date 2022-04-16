@@ -1,3 +1,14 @@
 .elements__text {
-
+  color: #000;
+  font-family: 'Inter-black';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.2;
+  padding: 0;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
+
