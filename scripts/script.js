@@ -14,7 +14,7 @@ ClosePopupButton.addEventListener('click', popupOpenToggle);
 SavepopupButton.addEventListener('click', popupOpenToggle);
 
 // Находим форму в DOM
-let formElement = document.querySelector('.Profile');// Воспользуйтесь методом querySelector()
+let formElement = document.querySelector('.popup__profile');// Воспользуйтесь методом querySelector()
 // Находим поля формы в DOM
 let nameInput = document.querySelector('.popup__name');// Воспользуйтесь инструментом .querySelector()
 let jobInput = document.querySelector('.popup__description');// Воспользуйтесь инструментом .querySelector()
