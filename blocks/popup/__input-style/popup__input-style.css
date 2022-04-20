@@ -2,20 +2,16 @@
   padding: 0;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-
   height: 27px;
-  color: #000;
   width: 358px;
-  font-family: inherit;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  color: #000000;
 }
 
 .popup__input-style:focus {
   outline: none;
-	border: 1px solid blue;
+  border: 1px solid blue;
 }
-
-
-
-
-
-
