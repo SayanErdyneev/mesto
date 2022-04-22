@@ -9,6 +9,7 @@
   .profile__info {
     flex-direction: columns;
     justify-content: center;
+    width: 282px;
     margin-top: 26px;
     margin-bottom: 36px;
   }
