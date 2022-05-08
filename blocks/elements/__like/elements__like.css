@@ -1,17 +1,16 @@
 .elements__like {
   background-image: url(../../../images/elements__like.svg);
   background-repeat: no-repeat;
-  background-position: 50%;
+  background-position: center;
+  background-size: contain;
   width: 22px;
   height: 19px;
   cursor: pointer;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+  margin: 0 5px 0 0;
   border: none;
   background-color: #fff;
-  margin-right: 5px;
   transition: .2s;
+  box-sizing: border-box;
 }
 
 .elements__like:hover {

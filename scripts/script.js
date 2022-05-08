@@ -1,13 +1,94 @@
-const OpenPopupButton = document.querySelector('.profile__button');
-const popup = document.querySelector('.popup');
-const ClosePopupButton = popup.querySelector('.popup__close');
-const SavepopupButton = popup.querySelector('.popup__save');
+// массив карточек
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
+  },
+];
+
+// Шаблоны
+const addCardTemplate = document.querySelector('#template').content.querySelector('.elements__item');
+const cardContainer = document.querySelector('.elements__list'); // контейнер
+
+// генерация карточки
+const generateToDoCard = (card) => {
+  const newCard = addCardTemplate.cloneNode(true);
+
+  const titleNewCard = newCard.querySelector('.elements__text');
+  const linkNewCard = newCard.querySelector('.elements__image');
+
+  titleNewCard.textContent = card.name;
+  linkNewCard.src = card.link;
+  return newCard;
+};
+
+// рендер карточки
+const renderCards = (card) => {
+  cardContainer.prepend(generateToDoCard(card));
+};
+
+initialCards.forEach((card) => {
+  renderCards(card);
+});
+
+const openPopupEditButton = document.querySelector('.profile__button');
+const openPopupAddButton = document.querySelector('.profile__addbutton');
+
+// const popup = document.querySelector('.popup');
+const popupEdit = document.querySelector('.popup_type_edit');
+const popupAddcard = document.querySelector('.popup_type_addcard');
+
+const closePopupEditButton = document.querySelector('.popup__close_edit');
+const closePopupAddButton = document.querySelector('.popup__close_addbutton');
+
+const savePopupEditButton = document.querySelector('.popup__save_edit');
+const savePopupAddButton = document.querySelector('.popup__save_addbutton');
 
 // Находим форму в DOM
-let formElement = document.querySelector('.popup__profile');// Воспользуйтесь методом querySelector()
-// Находим поля формы в DOM
-let nameInput = document.querySelector('.popup__name');// Воспользуйтесь инструментом .querySelector()
-let jobInput = document.querySelector('.popup__description');// Воспользуйтесь инструментом .querySelector()
+const formElement = document.querySelector('.popup__form_profile');
+const nameInput = document.querySelector('.popup__name');
+const jobInput = document.querySelector('.popup__description');
+
+const formAddCard = document.querySelector('.popup__form_addCard');
+const cardTitleInput = document.querySelector('.popup__title-card');
+const cardLinkInput = document.querySelector('.popup__link-card');
+
+// отрытие и закрытие popup
+function popupOpen(item) {
+  item.classList.add('popup_opened');
+}
+
+function popupClose(item) {
+  item.classList.remove('popup_opened');
+}
+
+function popupOverlayClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    popupClose(popupEdit);
+    popupClose(popupAddcard);
+  }
+}
+
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 
@@ -27,25 +108,40 @@ function formSubmitHandler(evt) {
   // Вставьте новые значения с помощью textContent
   popupValueName.textContent = nameInputValue;
   popupValueDescription.textContent = jobInputValue;
+
+  nameInput.value = '';
+  jobInput.value = '';
 }
 
-// добавить, убрать класс для popup
-function popupOpenToggle() {
-  popup.classList.toggle('popup_opened');
-}
+const handleSubmitAddCard = (evt) => {
+  evt.preventDefault();
 
-function popupOverlayClick (evt) {
-  if (evt.target === evt.currentTarget ) {
-    popupOpenToggle();
-  }
-}
+  renderCards({ name: cardTitleInput.value, link: cardLinkInput.value });
+
+  cardTitleInput.value = '';
+  cardLinkInput.value = '';
+};
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
 
+formAddCard.addEventListener('submit', handleSubmitAddCard);
+
 // открытие, закрытие popup
-OpenPopupButton.addEventListener('click', popupOpenToggle);
-ClosePopupButton.addEventListener('click', popupOpenToggle);
-SavepopupButton.addEventListener('click', popupOpenToggle);
-popup.addEventListener('click', popupOverlayClick);
+openPopupEditButton.addEventListener('click', () => popupOpen(popupEdit));
+openPopupAddButton.addEventListener('click', () => popupOpen(popupAddcard));
+
+closePopupEditButton.addEventListener('click', () => popupClose(popupEdit));
+closePopupAddButton.addEventListener('click', () => popupClose(popupAddcard));
+
+// savePopupEditButton.addEventListener('click', () => popupClose(popupEdit));
+// savePopupAddButton.addEventListener('click', () => popupClose(popupAddcard));
+
+// popupEdit.addEventListener('click', popupOverlayClick);
+// popupAddcard.addEventListener('click', popupOverlayClick);
+
+// Лайк карточки
+// Удаление карточки
+// Открытие попапа с картинкой
+// Плавное открытие и закрытие попапов
