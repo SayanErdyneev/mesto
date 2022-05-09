@@ -1,0 +1,4 @@
+.elements__like_checked {
+    background-image: url(../../../../images/elements__like_active.svg);
+    opacity: 1;
+}

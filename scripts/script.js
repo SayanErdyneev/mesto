@@ -30,6 +30,29 @@ const initialCards = [
 const addCardTemplate = document.querySelector('#template').content.querySelector('.elements__item');
 const cardContainer = document.querySelector('.elements__list'); // контейнер
 
+// обработчики событий карточек
+
+// функция рендера карточки
+const handleSubmitAddCard = (evt) => {
+  evt.preventDefault();
+
+  renderCards({ name: cardTitleInput.value, link: cardLinkInput.value });
+
+  cardTitleInput.value = '';
+  cardLinkInput.value = '';
+};
+
+// функция удаление карточки
+const deleteCard = (evt) => {
+  evt.target.closest('.elements__item').remove();
+}
+
+// функция лайк карточки
+const checkLike = (evt) => {
+  evt.target.closest('.elements__like').classList.toggle('elements__like_checked');
+}
+
+
 // генерация карточки
 const generateToDoCard = (card) => {
   const newCard = addCardTemplate.cloneNode(true);
@@ -39,6 +62,13 @@ const generateToDoCard = (card) => {
 
   titleNewCard.textContent = card.name;
   linkNewCard.src = card.link;
+
+  const deleteButton = newCard.querySelector('.elements__delete');
+  deleteButton.addEventListener('click', deleteCard);
+
+  const checkLikeButton = newCard.querySelector('.elements__like');
+  checkLikeButton.addEventListener('click', checkLike);
+
   return newCard;
 };
 
@@ -113,19 +143,9 @@ function formSubmitHandler(evt) {
   jobInput.value = '';
 }
 
-const handleSubmitAddCard = (evt) => {
-  evt.preventDefault();
-
-  renderCards({ name: cardTitleInput.value, link: cardLinkInput.value });
-
-  cardTitleInput.value = '';
-  cardLinkInput.value = '';
-};
-
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
-
 formAddCard.addEventListener('submit', handleSubmitAddCard);
 
 // открытие, закрытие popup
@@ -141,7 +161,6 @@ closePopupAddButton.addEventListener('click', () => popupClose(popupAddcard));
 // popupEdit.addEventListener('click', popupOverlayClick);
 // popupAddcard.addEventListener('click', popupOverlayClick);
 
-// Лайк карточки
-// Удаление карточки
+
 // Открытие попапа с картинкой
 // Плавное открытие и закрытие попапов
