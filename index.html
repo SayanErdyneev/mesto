@@ -33,7 +33,7 @@
       <ul class="elements__list">
 
 
-<!--
+        <!--
         <li class="elements__item">
           <img src="./images/Karachevsk.jpg" alt="Заброшенное здание на фоне горы." class="elements__image">
           <div class="elements__container">
@@ -91,6 +91,8 @@
     <p class="footer__copyright">© 2022 Mesto Russia</p>
   </footer>
 
+  <!-- Всплывающие окна -->
+
   <div class="popup popup_type_edit">
     <div class="popup__container">
       <button class="popup__close popup__close_edit" type="button"></button>
@@ -99,13 +101,12 @@
         <form name="Profile" class="popup__form_profile">
           <input type="text" name="Name" class="popup__name popup__input-style" placeholder="Жак-Ив Кусто">
           <input type="text" name="Profession" class="popup__description popup__input-style"
-          placeholder="Исследователь океана">
+            placeholder="Исследователь океана">
           <button type="submit" class="popup__save popup__save_edit">Сохранить</button>
         </form>
       </div>
     </div>
   </div>
-
 
   <div class="popup popup_type_addcard">
     <div class="popup__container">
@@ -114,13 +115,24 @@
         <h2 class="popup__title">Новое место</h2>
         <form name="addCard" class="popup__form_addCard">
           <input type="text" name="TitleCard" class="popup__title-card popup__input-style" placeholder="Название">
-          <input type="text" name="LinkCard" class="popup__link-card popup__input-style" placeholder="Ссылка на картинку">
+          <input type="text" name="LinkCard" class="popup__link-card popup__input-style"
+            placeholder="Ссылка на картинку">
           <button type="submit" class="popup__save popup__save_addbutton">Создать</button>
         </form>
       </div>
     </div>
   </div>
 
+
+  <div class="popup popup__type_openimage">
+    <div class="popup__container-image">
+      <button class="popup__close popup__close_imagebutton" type="button"></button>
+      <figure class="popup__figure-image">
+        <img alt="" class="popup__image" src="./images/Dombai.png">
+        <figcaption class="popup__figcaption-image">Водопады Игуасу</figcaption>
+      </figure>
+    </div>
+  </div>
 
 
   <template id="template">
@@ -136,6 +148,6 @@
 
 
   <script src="./scripts/script.js"></script>
-
 </body>
+
 </html>

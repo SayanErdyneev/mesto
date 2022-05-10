@@ -28,7 +28,32 @@ const initialCards = [
 
 // Шаблоны
 const addCardTemplate = document.querySelector('#template').content.querySelector('.elements__item');
-const cardContainer = document.querySelector('.elements__list'); // контейнер
+const cardContainer = document.querySelector('.elements__list');
+
+const openPopupEditButton = document.querySelector('.profile__button');
+const openPopupAddButton = document.querySelector('.profile__addbutton');
+
+const popupEdit = document.querySelector('.popup_type_edit');
+const popupAddcard = document.querySelector('.popup_type_addcard');
+const popupOpenImage = document.querySelector('.popup__type_openimage');
+const popupImage = popupOpenImage.querySelector('.popup__image');
+const popupFigcaptionImage = popupOpenImage.querySelector('.popup__figcaption-image');
+
+const closePopupEditButton = document.querySelector('.popup__close_edit');
+const closePopupAddButton = document.querySelector('.popup__close_addbutton');
+const closePopupImageButton = document.querySelector('.popup__close_imagebutton');
+
+const savePopupEditButton = document.querySelector('.popup__save_edit');
+const savePopupAddButton = document.querySelector('.popup__save_addbutton');
+
+// Находим форму в DOM
+const formElement = document.querySelector('.popup__form_profile');
+const nameInput = document.querySelector('.popup__name');
+const jobInput = document.querySelector('.popup__description');
+
+const formAddCard = document.querySelector('.popup__form_addCard');
+const cardTitleInput = document.querySelector('.popup__title-card');
+const cardLinkInput = document.querySelector('.popup__link-card');
 
 // обработчики событий карточек
 
@@ -52,6 +77,13 @@ const checkLike = (evt) => {
   evt.target.closest('.elements__like').classList.toggle('elements__like_checked');
 }
 
+// функция отрытия попапа с картинкой
+const openFullImage = (cardData) => {
+  popupImage.src = cardData.link;
+  popupFigcaptionImage.textContent = cardData.name;
+  popupOpen(popupOpenImage);
+}
+
 
 // генерация карточки
 const generateToDoCard = (card) => {
@@ -62,6 +94,7 @@ const generateToDoCard = (card) => {
 
   titleNewCard.textContent = card.name;
   linkNewCard.src = card.link;
+  linkNewCard.addEventListener('click', () => openFullImage(card));
 
   const deleteButton = newCard.querySelector('.elements__delete');
   deleteButton.addEventListener('click', deleteCard);
@@ -72,6 +105,7 @@ const generateToDoCard = (card) => {
   return newCard;
 };
 
+
 // рендер карточки
 const renderCards = (card) => {
   cardContainer.prepend(generateToDoCard(card));
@@ -80,28 +114,6 @@ const renderCards = (card) => {
 initialCards.forEach((card) => {
   renderCards(card);
 });
-
-const openPopupEditButton = document.querySelector('.profile__button');
-const openPopupAddButton = document.querySelector('.profile__addbutton');
-
-// const popup = document.querySelector('.popup');
-const popupEdit = document.querySelector('.popup_type_edit');
-const popupAddcard = document.querySelector('.popup_type_addcard');
-
-const closePopupEditButton = document.querySelector('.popup__close_edit');
-const closePopupAddButton = document.querySelector('.popup__close_addbutton');
-
-const savePopupEditButton = document.querySelector('.popup__save_edit');
-const savePopupAddButton = document.querySelector('.popup__save_addbutton');
-
-// Находим форму в DOM
-const formElement = document.querySelector('.popup__form_profile');
-const nameInput = document.querySelector('.popup__name');
-const jobInput = document.querySelector('.popup__description');
-
-const formAddCard = document.querySelector('.popup__form_addCard');
-const cardTitleInput = document.querySelector('.popup__title-card');
-const cardLinkInput = document.querySelector('.popup__link-card');
 
 // отрытие и закрытие popup
 function popupOpen(item) {
@@ -116,6 +128,7 @@ function popupOverlayClick(evt) {
   if (evt.target === evt.currentTarget) {
     popupClose(popupEdit);
     popupClose(popupAddcard);
+    popupClose(popupOpenImage);
   }
 }
 
@@ -154,13 +167,12 @@ openPopupAddButton.addEventListener('click', () => popupOpen(popupAddcard));
 
 closePopupEditButton.addEventListener('click', () => popupClose(popupEdit));
 closePopupAddButton.addEventListener('click', () => popupClose(popupAddcard));
+closePopupImageButton.addEventListener('click', () => popupClose(popupOpenImage));
 
-// savePopupEditButton.addEventListener('click', () => popupClose(popupEdit));
-// savePopupAddButton.addEventListener('click', () => popupClose(popupAddcard));
+savePopupEditButton.addEventListener('click', () => popupClose(popupEdit));
+savePopupAddButton.addEventListener('click', () => popupClose(popupAddcard));
 
-// popupEdit.addEventListener('click', popupOverlayClick);
-// popupAddcard.addEventListener('click', popupOverlayClick);
+popupEdit.addEventListener('click', popupOverlayClick);
+popupAddcard.addEventListener('click', popupOverlayClick);
+popupOpenImage.addEventListener('click', popupOverlayClick);
 
-
-// Открытие попапа с картинкой
-// Плавное открытие и закрытие попапов
