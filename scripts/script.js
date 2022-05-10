@@ -35,7 +35,7 @@ const openPopupAddButton = document.querySelector('.profile__addbutton');
 
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupAddcard = document.querySelector('.popup_type_addcard');
-const popupOpenImage = document.querySelector('.popup__type_openimage');
+const popupOpenImage = document.querySelector('.popup_type_openimage');
 const popupImage = popupOpenImage.querySelector('.popup__image');
 const popupFigcaptionImage = popupOpenImage.querySelector('.popup__figcaption-image');
 
@@ -47,11 +47,11 @@ const savePopupEditButton = document.querySelector('.popup__save_edit');
 const savePopupAddButton = document.querySelector('.popup__save_addbutton');
 
 // Находим форму в DOM
-const formElement = document.querySelector('.popup__form_profile');
+const formElement = document.querySelector('.popup_form_profile');
 const nameInput = document.querySelector('.popup__name');
 const jobInput = document.querySelector('.popup__description');
 
-const formAddCard = document.querySelector('.popup__form_addCard');
+const formAddCard = document.querySelector('.popup_form_addCard');
 const cardTitleInput = document.querySelector('.popup__title-card');
 const cardLinkInput = document.querySelector('.popup__link-card');
 
