@@ -3,6 +3,10 @@
   border-radius: 10px;
   margin: 0;
   padding: 0;
-  height: 361px;
+  min-height: 361px;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  box-sizing: border-box;
 }

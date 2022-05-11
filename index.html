@@ -18,7 +18,7 @@
     <section class="profile">
 
       <div class="profile__container">
-        <img src="./images/Avatar.jpg" alt="" class="profile__avatar">
+        <img src="./images/Avatar.jpg" alt="аватар пользователя." class="profile__avatar">
         <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
           <button class="profile__button" type="button"></button>
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <button class="profile__addbutton" type="button"></button>
+      <button class="profile__add-button" type="button"></button>
     </section>
 
     <section class="elements" aria-label="Карточки с достопримечательностями">
@@ -49,35 +49,36 @@
       <button class="popup__close popup__close_edit" type="button"></button>
       <div class="popup__body">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form name="Profile" class="popup__profileform">
-          <input type="text" name="Name" class="popup__name popup__input-style" placeholder="Жак-Ив Кусто">
+        <form name="Profile" class="popup__profile">
+          <input type="text" name="Name" class="popup__name popup__input-style" value="Жак-Ив Кусто">
           <input type="text" name="Profession" class="popup__description popup__input-style"
-            placeholder="Исследователь океана">
+            value="Исследователь океана">
           <button type="submit" class="popup__save popup__save_edit">Сохранить</button>
         </form>
       </div>
     </div>
   </div>
 
-  <div class="popup popup_type_addcard">
+
+  <div class="popup popup_type_add-card">
     <div class="popup__container">
-      <button class="popup__close popup__close_addbutton" type="button"></button>
+      <button class="popup__close popup__close_add-button" type="button"></button>
       <div class="popup__body">
         <h2 class="popup__title">Новое место</h2>
-        <form name="addCard" class="popup__addCardform">
+        <form name="addCard" class="popup__add-card">
           <input type="text" name="TitleCard" class="popup__title-card popup__input-style" placeholder="Название">
           <input type="text" name="LinkCard" class="popup__link-card popup__input-style"
             placeholder="Ссылка на картинку">
-          <button type="submit" class="popup__save popup__save_addbutton">Создать</button>
+          <button type="submit" class="popup__save popup__save_add-button">Создать</button>
         </form>
       </div>
     </div>
   </div>
 
 
-  <div class="popup popup_type_openimage">
+  <div class="popup popup_type_open-image">
     <div class="popup__container-image">
-      <button class="popup__close popup__close_imagebutton" type="button"></button>
+      <button class="popup__close popup__close_image-button" type="button"></button>
       <figure class="popup__figure-image">
         <img src="#" alt="Описание карточек." class="popup__image">
         <figcaption class="popup__figcaption-image"></figcaption>
@@ -97,7 +98,7 @@
     </li>
   </template>
 
-
+  <script src="./scripts/data.js"></script>
   <script src="./scripts/script.js"></script>
 </body>
 

@@ -3,14 +3,14 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  width: 22px;
-  height: 19px;
+  min-width: 22px;
+  min-height: 19px;
   cursor: pointer;
   margin: 0 5px 0 0;
   border: none;
   background-color: #fff;
   transition: .2s;
-  box-sizing: border-box;
+  padding: 0;
 }
 
 .elements__like:hover {
