@@ -8,7 +8,7 @@
   background-image: url(../../../images/popup__close.svg);
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #000000;
+  background-color: transparent;
   cursor: pointer;
   transition: opacity .7s;
 }

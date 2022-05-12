@@ -62,7 +62,7 @@ const openFullImage = (cardData) => {
 
 
 // генерация карточки
-const generateToDoCard = (card) => {
+const generateCard = (card) => {
   const newCard = addCardTemplate.cloneNode(true);
 
   const titleNewCard = newCard.querySelector('.elements__text');
@@ -84,7 +84,7 @@ const generateToDoCard = (card) => {
 
 // рендер карточки
 const renderCards = (card) => {
-  cardContainer.prepend(generateToDoCard(card));
+  cardContainer.prepend(generateCard(card));
 };
 
 initialCards.forEach((card) => {
@@ -100,7 +100,7 @@ function closePopup(item) {
   item.classList.remove('popup_opened');
 }
 
-function popupOverlayClick(evt) {
+function closePopupOverlayClick(evt) {
   if (evt.target === evt.currentTarget) {
     const openedPopup  = document.querySelector('.popup_opened');
     closePopup(openedPopup);
@@ -141,8 +141,8 @@ buttonSaveEditUserProfile.addEventListener('click', () => closePopup(popupEdit))
 buttonSaveAddCard.addEventListener('click', () => closePopup(popupAddcard));
 
 
-popupEdit.addEventListener('click', popupOverlayClick);
-popupAddcard.addEventListener('click', popupOverlayClick);
-popupOpenImage.addEventListener('click', popupOverlayClick);
+popupEdit.addEventListener('click', closePopupOverlayClick);
+popupAddcard.addEventListener('click', closePopupOverlayClick);
+popupOpenImage.addEventListener('click', closePopupOverlayClick);
 
 
