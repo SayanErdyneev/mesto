@@ -20,8 +20,8 @@ const buttonSaveAddCard = document.querySelector('.popup__save_add-button');
 
 // Находим форму в DOM
 const formElement = document.querySelector('.popup__profile');
-const nameInput = document.querySelector('.popup__name');
-const jobInput = document.querySelector('.popup__description');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_description');
 
 const formAddCard = document.querySelector('.popup__add-card');
 const cardTitleInput = document.querySelector('.popup__title-card');
@@ -124,10 +124,13 @@ function handleSubmitEditProfile(evt) {
   popupValueDescription.textContent = jobInputValue;
 }
 
+
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', handleSubmitEditProfile);
 formAddCard.addEventListener('submit', handleSubmitAddCard);
+
+
 
 // открытие, закрытие popup
 buttonOpenEditUserProfile.addEventListener('click', () => openPopup(popupEdit));

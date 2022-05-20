@@ -1,0 +1,18 @@
+.popup__input-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 44px;
+  max-height: 44px;
+  margin-bottom: 13px;
+  box-sizing: border-box;
+}
+
+.popup__input-container:last-of-type {
+   margin-bottom: 32px;
+}
+
+@media screen and (max-width: 530px) {
+  .popup__input-container:last-of-type {
+    margin-bottom: 45px;
+ }
+}
