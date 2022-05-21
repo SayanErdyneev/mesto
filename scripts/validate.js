@@ -1,35 +1,44 @@
 // константы
-const form = document.querySelector('.popup__profile');
-const formInput = form.querySelector('.popup__input');
-const formError = form.querySelector(`.${formInput.id}-error`);
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save',
+  inactiveButtonClass: 'popup__save_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_active'
+}
 
-// функции
-const showInputError = (formElement, inputElement, errorMessage) => {
+
+// Функции
+
+// Функция, которая добавляет класс с ошибкой
+const showInputError = (formElement, inputElement, errorMessage, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_type_error');
+  inputElement.classList.add(validationConfig.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__error_active');
+  errorElement.classList.add(validationConfig.errorClass);
 };
 
-const hideInputError = (formElement, inputElement) => {
+// Функция, которая удаляет класс с ошибкой
+const hideInputError = (formElement, inputElement, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('popup__error_active');
+  inputElement.classList.remove(validationConfig.inputErrorClass);
+  errorElement.classList.remove(validationConfig.errorClass);
   errorElement.textContent = '';
 };
 
-const checkInputValidity = (formElement, inputElement) => {
+
+// Функция, которая проверяет валидность поля
+const checkInputValidity = (formElement, inputElement, validationConfig) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, validationConfig);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, validationConfig);
   }
 };
 
 
 // функция наличия невалидного поля input
-
-
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -37,45 +46,45 @@ const hasInvalidInput = (inputList) => {
 };
 
 
+
 // Функция отключает и включает кнопку
 
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, validationConfig) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__save_inactive');
+    buttonElement.classList.add(validationConfig.inactiveButtonClass);
   } else {
-      buttonElement.classList.remove('popup__save_inactive');
+    buttonElement.classList.remove(validationConfig.inactiveButtonClass);
   }
 };
 
 
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__save_edit');
 
-  toggleButtonState(inputList, buttonElement);
+const setEventListeners = (formElement, validationConfig) => {
+  const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
+  const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
+
+  toggleButtonState(inputList, buttonElement, validationConfig);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      checkInputValidity(formElement, inputElement);
+      checkInputValidity(formElement, inputElement, validationConfig);
 
-      toggleButtonState(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement, validationConfig);
     });
   });
 };
 
+const enableValidation = (validationConfig) => {
+  const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
 
-
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__profile'));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    setEventListeners(formElement);
+      setEventListeners(formElement, validationConfig);
   });
 };
 
 
-enableValidation();
 
-
+enableValidation(validationConfig);

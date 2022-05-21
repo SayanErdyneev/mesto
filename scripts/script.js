@@ -86,7 +86,6 @@ const generateCard = (card) => {
 const renderCards = (card) => {
   cardContainer.prepend(generateCard(card));
 };
-
 initialCards.forEach((card) => {
   renderCards(card);
 });
@@ -106,6 +105,14 @@ function closePopupOverlayClick(evt) {
     closePopup(openedPopup);
   }
 }
+
+function closePopupClickEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup  = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
+
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -147,5 +154,7 @@ buttonSaveAddCard.addEventListener('click', () => closePopup(popupAddcard));
 popupEdit.addEventListener('click', closePopupOverlayClick);
 popupAddcard.addEventListener('click', closePopupOverlayClick);
 popupOpenImage.addEventListener('click', closePopupOverlayClick);
+document.addEventListener('keydown', closePopupClickEscape);
+
 
 
