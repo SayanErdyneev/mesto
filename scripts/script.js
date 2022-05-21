@@ -39,8 +39,9 @@ const handleSubmitAddCard = (evt) => {
 
   renderCards({ name: cardTitleInput.value, link: cardLinkInput.value });
 
-  cardTitleInput.value = '';
-  cardLinkInput.value = '';
+  formAddCard.reset();
+
+  disableSubmitButton(buttonSaveAddCard, validationConfig);
 };
 
 // функция удаление карточки
@@ -70,6 +71,7 @@ const generateCard = (card) => {
 
   titleNewCard.textContent = card.name;
   linkNewCard.src = card.link;
+  linkNewCard.alt = titleNewCard.textContent;
   linkNewCard.addEventListener('click', () => openFullImage(card));
 
   const deleteButton = newCard.querySelector('.elements__delete');
@@ -90,13 +92,18 @@ initialCards.forEach((card) => {
   renderCards(card);
 });
 
+
+
+
 // отрытие и закрытие popup
 function openPopup(item) {
   item.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscClose);
 }
 
 function closePopup(item) {
   item.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscClose);
 }
 
 function closePopupOverlayClick(evt) {
@@ -106,13 +113,14 @@ function closePopupOverlayClick(evt) {
   }
 }
 
-function closePopupClickEscape(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup  = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-}
+// функционал, отвечающий за нажатие на ESC
 
+function handleEscClose(evt) {
+  if (evt.key === 'Escape') {
+   const openedPopup  = document.querySelector('.popup_opened');
+   closePopup(openedPopup);
+  }
+ }
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -122,13 +130,9 @@ function handleSubmitEditProfile(evt) {
   // Так мы можем определить свою логику отправки.
   // О том, как это делать, расскажем позже.
 
-  // Получите значение полей jobInput и nameInput из свойства value
-  const nameInputValue = nameInput.value;
-  const jobInputValue = jobInput.value;
-
-  // Вставьте новые значения с помощью textContent
-  popupValueName.textContent = nameInputValue;
-  popupValueDescription.textContent = jobInputValue;
+   // Вставьте новые значения с помощью textContent
+  popupValueName.textContent = nameInput.value;
+  popupValueDescription.textContent = jobInput.value;
 }
 
 
@@ -151,10 +155,23 @@ buttonSaveEditUserProfile.addEventListener('click', () => closePopup(popupEdit))
 buttonSaveAddCard.addEventListener('click', () => closePopup(popupAddcard));
 
 
+// import { enableValidation } from 'validate.js';
+// buttonSaveAddCard.addEventListener('click', () => enableValidation(validationConfig));
+
+
 popupEdit.addEventListener('click', closePopupOverlayClick);
 popupAddcard.addEventListener('click', closePopupOverlayClick);
 popupOpenImage.addEventListener('click', closePopupOverlayClick);
-document.addEventListener('keydown', closePopupClickEscape);
+
+
+
+
+
+
+
+
+
+
 
 
 

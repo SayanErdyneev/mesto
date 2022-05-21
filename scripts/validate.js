@@ -8,7 +8,6 @@ const validationConfig = {
   errorClass: 'popup__error_active'
 }
 
-
 // Функции
 
 // Функция, которая добавляет класс с ошибкой
@@ -46,33 +45,40 @@ const hasInvalidInput = (inputList) => {
 };
 
 
-
 // Функция отключает и включает кнопку
+
+function enableSubmitButton(buttonElement, validationConfig) {
+  buttonElement.classList.remove(validationConfig.inactiveButtonClass);
+  buttonElement.removeAttribute("disabled");
+}
+
+function disableSubmitButton (buttonElement, validationConfig) {
+  buttonElement.classList.add(validationConfig.inactiveButtonClass);
+  buttonElement.setAttribute("disabled", true);
+}
 
 const toggleButtonState = (inputList, buttonElement, validationConfig) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(validationConfig.inactiveButtonClass);
+    disableSubmitButton(buttonElement, validationConfig);
   } else {
-    buttonElement.classList.remove(validationConfig.inactiveButtonClass);
+    enableSubmitButton(buttonElement, validationConfig);
   }
 };
-
 
 
 const setEventListeners = (formElement, validationConfig) => {
   const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
   const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
-
   toggleButtonState(inputList, buttonElement, validationConfig);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       checkInputValidity(formElement, inputElement, validationConfig);
-
       toggleButtonState(inputList, buttonElement, validationConfig);
     });
   });
 };
+
 
 const enableValidation = (validationConfig) => {
   const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
@@ -86,5 +92,6 @@ const enableValidation = (validationConfig) => {
 };
 
 
-
 enableValidation(validationConfig);
+
+
