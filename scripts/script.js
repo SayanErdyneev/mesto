@@ -155,9 +155,6 @@ buttonSaveEditUserProfile.addEventListener('click', () => closePopup(popupEdit))
 buttonSaveAddCard.addEventListener('click', () => closePopup(popupAddcard));
 
 
-// import { enableValidation } from 'validate.js';
-// buttonSaveAddCard.addEventListener('click', () => enableValidation(validationConfig));
-
 
 popupEdit.addEventListener('click', closePopupOverlayClick);
 popupAddcard.addEventListener('click', closePopupOverlayClick);
